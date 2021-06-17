@@ -17,8 +17,7 @@ resource "github_repository" "this" {
   auto_init              = true
   license_template       = "apache-2.0"
   archive_on_destroy     = true
-
-
+  vulnerability_alerts   = true
 }
 
 resource "github_branch" "default" {

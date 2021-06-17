@@ -53,7 +53,7 @@ locals {
 
 locals {
   // topics only
-  default_topics = ["terraform-managed"]
+  default_topics = ["managed-by-terraform"]
 
   chef_topics       = var.repo_type == "cookbook" ? ["chef", "chef-cookbook", "chef-resource", "${replace(replace(local.supermarket_name, "_", "-"), ".", "")}", "hacktoberfest"] : []
   ide_topics        = var.repo_type == "ide" ? ["ide", "${replace(replace(var.name, "_", "-"), ".", "")}"] : []

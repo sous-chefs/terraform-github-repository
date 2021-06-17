@@ -8,7 +8,7 @@ variable "supermarket_name_override" {
 }
 
 variable "projects_enabled" {
-  type = bool
+  type    = bool
   default = false
 }
 variable "repo_type" {

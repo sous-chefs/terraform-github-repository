@@ -44,11 +44,10 @@ locals {
 locals {
   // status checks only
   default_status_checks    = ["mdl", "yamllint"]
-  chef_status_checks       = var.repo_type == "cookbook" ? ["delivery", "integration"] : []
+  chef_status_checks       = var.repo_type == "cookbook" ? ["delivery", "integration", "Changelog Validator", "Metadata Version Validator", "Release Label Validator"] : []
   terraform_status_checks  = var.repo_type == "terraform" ? ["terraform-lint", "Terraform Cloud/sous-chefs/${var.name}"] : []
   additional_status_checks = var.additional_status_checks != null ? var.additional_status_checks : []
   status_checks            = distinct(compact(concat(local.default_status_checks, local.chef_status_checks, local.terraform_status_checks, local.additional_status_checks)))
-
 }
 
 locals {

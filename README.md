@@ -31,4 +31,8 @@ Note: **Board Members only**
 Add repository to `terraform.tfvars.json`
 import the state file using:
 
-`terraform import module.repository[\"bot-trainer\"].github_repository.this bot-trainer`
+```bash
+terraform import module.repository[\"bot-trainer\"].github_repository.this bot-trainer
+terraform import module.repository[\"bot-trainer\"].github_branch.default bot-trainer:main
+terraform import module.repository[\"bot-trainer\"].github_branch_protection.default bot-trainer:main
+```

@@ -1,11 +1,10 @@
 ---
-name: ci
+name: lint-unit
 
 "on":
   pull_request:
   push:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   yamllint:
@@ -30,5 +29,4 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
       - name: Run JSON Lint
-        run: |
-         git ls-files *.json | xargs jq empty
+        run: git ls-files *.json | xargs jq empty

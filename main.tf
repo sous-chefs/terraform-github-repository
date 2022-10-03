@@ -1,6 +1,9 @@
 module "repository" {
-  for_each                  = { for repo in var.repository : repo.name => repo }
-  source                    = "./modules/repository"
+  for_each = { for repo in var.repository : repo.name => repo }
+
+  source  = "damacus/github-repository/module"
+  version = "0.0.3"
+
   name                      = each.value.name
   repo_type                 = each.value.repo_type
   supermarket_name_override = each.value.supermarket_name_override

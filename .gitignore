@@ -4,3 +4,4 @@ terraform.tfvars
 .terraform
 *.sh
 terraform.tfstate
+.idea

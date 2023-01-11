@@ -10,6 +10,8 @@ resource "github_repository" "this" {
   allow_merge_commit     = false
   allow_squash_merge     = true
   allow_rebase_merge     = false
+  allow_auto_merge       = true
+  allow_update_branch    = true
   delete_branch_on_merge = true
   has_downloads          = false
   archived               = false
@@ -18,6 +20,17 @@ resource "github_repository" "this" {
   license_template       = "apache-2.0"
   archive_on_destroy     = true
   vulnerability_alerts   = true
+  security_and_analysis {
+    advanced_security {
+      status = "enabled"
+    }
+    secret_scanning {
+      status = "enabled"
+    }
+    secret_scanning_push_protection {
+      status = "enabled"
+    }
+  }
 }
 
 resource "github_branch" "default" {

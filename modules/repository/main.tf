@@ -20,22 +20,6 @@ resource "github_repository" "this" {
   license_template       = "apache-2.0"
   archive_on_destroy     = true
   vulnerability_alerts   = true
-  # TODO(ramereth): This currently causes the following error:
-  # 422 Advanced security is always available for public repos []
-  #
-  # Disabled until the following PR is merged and released:
-  # https://github.com/integrations/terraform-provider-github/pull/1431
-  security_and_analysis {
-    advanced_security {
-      status = "enabled"
-    }
-    secret_scanning {
-      status = "enabled"
-    }
-    secret_scanning_push_protection {
-      status = "enabled"
-    }
-  }
 }
 
 resource "github_branch" "default" {

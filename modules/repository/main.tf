@@ -25,17 +25,17 @@ resource "github_repository" "this" {
   #
   # Disabled until the following PR is merged and released:
   # https://github.com/integrations/terraform-provider-github/pull/1431
-  # security_and_analysis {
-  #   advanced_security {
-  #     status = "enabled"
-  #   }
-  #   secret_scanning {
-  #     status = "enabled"
-  #   }
-  #   secret_scanning_push_protection {
-  #     status = "enabled"
-  #   }
-  # }
+  security_and_analysis {
+    advanced_security {
+      status = "enabled"
+    }
+    secret_scanning {
+      status = "enabled"
+    }
+    secret_scanning_push_protection {
+      status = "enabled"
+    }
+  }
 }
 
 resource "github_branch" "default" {
@@ -76,11 +76,13 @@ resource "github_team_repository" "maintainer_access" {
   repository = github_repository.this.name
   permission = "push"
 }
+
 resource "github_team_repository" "bot_access" {
   team_id    = "bots"
   repository = github_repository.this.name
   permission = "admin"
 }
+
 resource "github_team_repository" "board_access" {
   team_id    = "board"
   repository = github_repository.this.name

@@ -1,6 +1,3 @@
 {
-  "recommendations": [
-      "mauve.terraform",
-      "editorconfig.editorconfig"
-  ]
+  "recommendations": ["hashicorp.terraform", "editorconfig.editorconfig"]
 }

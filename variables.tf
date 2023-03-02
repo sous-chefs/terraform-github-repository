@@ -8,6 +8,7 @@ variable "repository" {
     additional_topics         = optional(list(string), [])
     additional_status_checks  = optional(list(string), [])
     projects_enabled          = optional(bool)
+    discussions_enabled       = optional(bool)
   }))
   description = "The repositories to create."
 }

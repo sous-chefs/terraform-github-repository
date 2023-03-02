@@ -40,6 +40,10 @@ variable "additional_status_checks" {
   default = []
 }
 
+variable "discussions_enabled" {
+  type    = bool
+  default = false
+}
 
 locals {
   // supermarket_name

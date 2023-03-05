@@ -20,22 +20,15 @@ resource "github_repository" "this" {
   license_template       = "apache-2.0"
   archive_on_destroy     = true
   vulnerability_alerts   = true
-  # TODO(ramereth): This currently causes the following error:
-  # 422 Advanced security is always available for public repos []
-  #
-  # Disabled until the following PR is merged and released:
-  # https://github.com/integrations/terraform-provider-github/pull/1431
-  # security_and_analysis {
-  #   advanced_security {
-  #     status = "enabled"
-  #   }
-  #   secret_scanning {
-  #     status = "enabled"
-  #   }
-  #   secret_scanning_push_protection {
-  #     status = "enabled"
-  #   }
-  # }
+
+  security_and_analysis {
+    secret_scanning {
+      status = "enabled"
+    }
+    secret_scanning_push_protection {
+      status = "enabled"
+    }
+  }
 }
 
 resource "github_branch" "default" {
@@ -55,9 +48,7 @@ resource "github_branch_protection" "default" {
   # when a repo is being initialized/created you can run into race conditions
   # by adding an explicit depends we force the repo to be created
   # before it attempts to add branch protection
-  depends_on = [
-    github_repository.this,
-  ]
+  depends_on = [github_repository.this]
 
   required_status_checks {
     strict   = true
@@ -76,11 +67,13 @@ resource "github_team_repository" "maintainer_access" {
   repository = github_repository.this.name
   permission = "push"
 }
+
 resource "github_team_repository" "bot_access" {
   team_id    = "bots"
   repository = github_repository.this.name
   permission = "admin"
 }
+
 resource "github_team_repository" "board_access" {
   team_id    = "board"
   repository = github_repository.this.name

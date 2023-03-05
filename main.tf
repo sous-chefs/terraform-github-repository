@@ -9,4 +9,5 @@ module "repository" {
   additional_topics         = each.value.additional_topics
   additional_status_checks  = each.value.additional_status_checks
   projects_enabled          = each.value.projects_enabled
+  discussions_enabled       = each.value.discussions_enabled
 }

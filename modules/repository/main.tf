@@ -20,6 +20,15 @@ resource "github_repository" "this" {
   license_template       = "apache-2.0"
   archive_on_destroy     = true
   vulnerability_alerts   = true
+
+  security_and_analysis {
+    secret_scanning {
+      status = "enabled"
+    }
+    secret_scanning_push_protection {
+      status = "enabled"
+    }
+  }
 }
 
 resource "github_branch" "default" {
@@ -39,9 +48,7 @@ resource "github_branch_protection" "default" {
   # when a repo is being initialized/created you can run into race conditions
   # by adding an explicit depends we force the repo to be created
   # before it attempts to add branch protection
-  depends_on = [
-    github_repository.this,
-  ]
+  depends_on = [github_repository.this]
 
   required_status_checks {
     strict   = true

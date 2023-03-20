@@ -1,3 +1,7 @@
 {
-  "recommendations": ["hashicorp.terraform", "editorconfig.editorconfig"]
+  "recommendations": [
+    "editorconfig.editorconfig",
+    "hashicorp.terraform",
+    "DavidAnson.vscode-markdownlint"
+  ]
 }

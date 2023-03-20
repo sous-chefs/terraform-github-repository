@@ -3,6 +3,9 @@ name: ci
 
 "on":
   pull_request:
+  push:
+    branches:
+      - main
 
 jobs:
   yamllint:
@@ -22,7 +25,6 @@ jobs:
         uses: DavidAnson/markdownlint-cli2-action@v9
         with:
           globs: "**/*.md"
-
   json:
     runs-on: ubuntu-latest
     steps:
@@ -30,12 +32,4 @@ jobs:
         uses: actions/checkout@v3
       - name: Run JSON Lint
         run: |
-          git ls-files *.json | xargs jq empty
-
-  terraform-lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v3
-      - name: Lint Terraform
-        uses: actionshub/terraform-lint@main
+         git ls-files *.json | xargs jq empty

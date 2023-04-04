@@ -3,8 +3,8 @@ variable "name" {
 }
 
 variable "supermarket_name_override" {
-  default = ""
   type    = string
+  default = ""
 }
 
 variable "projects_enabled" {
@@ -49,19 +49,45 @@ locals {
   supermarket_name = var.supermarket_name_override == null ? var.name : var.supermarket_name_override
 
   // status checks
-  chef_status_checks       = var.repo_type == "cookbook" ? ["lint-unit /  markdownlint-cli2", "lint-unit / yamllint", "lint-unit / cookstyle", "Changelog Validator", "Metadata Version Validator", "Release Label Validator"] : []
-  terraform_status_checks  = var.repo_type == "terraform" ? [" markdownlint-cli2", "yamllint", "json", "terraform-lint", "Terraform Cloud/sous-chefs/${var.name}"] : []
+  chef_status_checks = var.repo_type == "cookbook" ? [
+    "lint-unit / markdownlint-cli2",
+    "lint-unit / yamllint",
+    "lint-unit / cookstyle",
+    "Changelog Validator",
+    "Metadata Version Validator",
+    "Release Label Validator"
+  ] : []
+
+  terraform_status_checks = var.repo_type == "terraform" ? [
+    "markdownlint-cli2",
+    "yamllint",
+    "json",
+    "terraform-lint",
+    "Terraform Cloud/sous-chefs/${var.name}"
+  ] : []
+
   additional_status_checks = var.additional_status_checks != null ? var.additional_status_checks : []
-  status_checks            = distinct(compact(concat(local.chef_status_checks, local.terraform_status_checks, local.additional_status_checks)))
+
+  status_checks = distinct(compact(concat(
+    local.chef_status_checks,
+    local.terraform_status_checks,
+    local.additional_status_checks
+  )))
 
   // topics
-  default_topics = ["managed-by-terraform"]
-
+  default_topics    = ["managed-by-terraform"]
   chef_topics       = var.repo_type == "cookbook" ? ["chef", "chef-cookbook", "chef-resource", "${replace(replace(local.supermarket_name, "_", "-"), ".", "")}", "hacktoberfest"] : []
   ide_topics        = var.repo_type == "ide" ? ["ide", "${replace(replace(var.name, "_", "-"), ".", "")}"] : []
   terraform_topics  = var.repo_type == "terraform" ? ["terraform", "${replace(replace(var.name, "_", "-"), ".", "")}"] : []
   additional_topics = var.additional_topics != null ? var.additional_topics : []
-  topics            = distinct(compact(concat(local.default_topics, local.chef_topics, local.ide_topics, local.terraform_topics, local.additional_topics)))
+
+  topics = distinct(compact(concat(
+    local.default_topics,
+    local.chef_topics,
+    local.ide_topics,
+    local.terraform_topics,
+    local.additional_topics
+  )))
 
   // description
   chef_description      = var.repo_type == "cookbook" ? "Development repository for the ${local.supermarket_name} cookbook" : ""

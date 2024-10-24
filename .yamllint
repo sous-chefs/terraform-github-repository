@@ -1,4 +1,7 @@
 ---
+ignore: |
+  charts
+
 extends: default
 rules:
   line-length:

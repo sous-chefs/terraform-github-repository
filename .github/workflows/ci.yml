@@ -32,4 +32,4 @@ jobs:
         uses: actions/checkout@v4
       - name: Run JSON Lint
         run: |
-         git ls-files *.json | xargs jq empty
+          git ls-files *.json | xargs jq empty

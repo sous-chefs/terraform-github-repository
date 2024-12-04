@@ -5,7 +5,7 @@ terraform {
       version = "~> 6.0"
     }
   }
-  required_version = "~> 1.9.0"
+  required_version = "~> 1.10.0"
 
   backend "remote" {
     organization = "sous-chefs"

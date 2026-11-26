@@ -15,11 +15,11 @@ There are 4 repository types we have:
 
 These repository objects have a number of properties available which can be used:
 
-| property| description | repo_types used by|
-|---|---|---|
+| property | description | repo_types used by |
+| --- | --- | --- |
 | `name` | the name of the repo | all |
 | `repo_type` | the type of repository as per above list | all |
-| `supermarket_name_override`| If the supermarket name of the cookbook is not the same as the repo name | `cookbook` |
+| `supermarket_name_override` | If the supermarket name of the cookbook is not the same as the repo name | `cookbook` |
 | `description_override` | Used to override the description. | `ide`, `terraform`, `other` |
 | `additional_topics` | Used to add additional topics to the repo | all |
 | `additional_status_checks` | Used to add additional required status checks to the repo | all |
